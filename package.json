@@ -1,0 +1,27 @@
+{
+  "name": "vue-iui",
+  "version": "1.0.0",
+  "description": "infinite ui library for vue",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.oschina.net/janking/Infinite-f2e.git"
+  },
+  "keywords": [
+    "vue",
+    "ui",
+    "infinite"
+  ],
+  "author": "Infinite-FED",
+  "license": "MIT",
+  "dependencies": {
+    "element-ui": "^1.3.7",
+    "vue": "^2.3.4"
+  }
+}
