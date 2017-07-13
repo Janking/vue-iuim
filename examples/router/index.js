@@ -13,6 +13,13 @@ export default new Router({
       meta: {
         title: '登录'
       }
+    },
+    {
+      path: '/home',
+      component: resolve => require(['../pages/layouts/Home.vue'].resolve),
+      meta: {
+        title: '列表'
+      }
     }
   ]
 });

@@ -4,7 +4,7 @@
     <div>
       <h1>Vue-iuim</h1>
       <br>
-      <a class="button-line" @touchstart="$router.push('/')">Get Started</a>
+      <a class="button-line" @touchstart="$router.push('/home/list')">Get Started</a>
     </div>
   </div>
 </div>
