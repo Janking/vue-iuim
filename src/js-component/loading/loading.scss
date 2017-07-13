@@ -13,6 +13,17 @@
   height: 100%;
   background-color: rgba(0, 0, 0, .55);
   z-index: 99999999;
+  // opacity: 0;
+  // visibility: hidden;
+  &.fade-in {
+    opacity: 1;
+    visibility: visible;
+    @include transition(opacity .3s ease-in);
+  }
+  &.fade-out {
+    opacity: 0;
+    @include transition(opacity .3s ease-out);
+  }
   svg {
     position: absolute;
     z-index: 99999999999;

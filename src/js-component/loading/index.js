@@ -21,6 +21,23 @@ function getUid() {
   return guid++;
 }
 
+function getTransitionEnd() {
+  var t,
+    el = document.createElement('surface'),
+    transitions = {
+      'transition': 'transitionend',
+      'OTransition': 'oTransitionEnd',
+      'MozTransition': 'transitionend',
+      'WebkitTransition': 'webkitTransitionEnd'
+    }
+
+  for (t in transitions) {
+    if (el.style[t] !== undefined) {
+      return transitions[t];
+    }
+  }
+}
+
 function toggle(context, selector, value) {
   if (context !== document.body) {
     context.classList[value ? 'add' : 'remove']('iui-loading-wrap');
@@ -28,7 +45,8 @@ function toggle(context, selector, value) {
   if (value) {
     context.appendChild(ELEMENT_CACHE[selector.getAttribute('data-loading-id')]);
   } else {
-    ELEMENT_CACHE[selector.getAttribute('data-loading-id')].remove();
+    let currentEl = ELEMENT_CACHE[selector.getAttribute('data-loading-id')];
+    currentEl.remove();
   }
 }
 
