@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const path = require('path');
 
 function resolve(dir) {
@@ -37,7 +38,9 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          cssSourceMap: false
+          loaders: {
+            scss: 'vue-style-loader!css-loader!sass-loader'
+          }
         }
       },
       {

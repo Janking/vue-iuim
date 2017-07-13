@@ -7,7 +7,7 @@
     "example": "examples"
   },
   "scripts": {
-    "dev": "webpack --env=dev --progress --profile --colors"
+    "dev": " ./node_modules/.bin/webpack-dev-server  --env=dev"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
     "babel-loader": "^7.1.1",
     "css-loader": "^0.28.4",
     "element-ui": "^1.3.7",
+    "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.29.0",
     "node-sass": "^4.5.3",
