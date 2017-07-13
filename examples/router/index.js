@@ -5,20 +5,19 @@ export default new Router({
   // mode: 'history',
   routes: [{
       path: '/',
-      redirect: '/login'
+      redirect: '/welcome'
     },
     {
-      path: '/login',
+      path: '/welcome',
       component: resolve => require(['../pages/Welcome.vue'], resolve),
       meta: {
-        title: '登录'
+        title: '欢饮体验vue-iuim'
       }
-    },
-    {
+    }, {
       path: '/home',
-      component: resolve => require(['../pages/layouts/Home.vue'].resolve),
+      component: resolve => require(['../pages/Index.vue'], resolve),
       meta: {
-        title: '列表'
+        title: '组件列表'
       }
     }
   ]

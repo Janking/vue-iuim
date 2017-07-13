@@ -7,7 +7,6 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-console.log(resolve('./examples/'))
 module.exports = {
   entry: {
     app: './index.js'
@@ -17,10 +16,11 @@ module.exports = {
     filename: "[name].[hash].js"
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.scss'],
     alias: {
       '@': resolve('./examples/'),
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
+      'scss-kit': path.resolve(__dirname, './src/scss-kit/_index.scss')
     }
   },
   module: {
@@ -72,7 +72,8 @@ module.exports = {
       filename: './index.html',
       template: './index.html',
       inject: true
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
     contentBase: path.join(__dirname, "dist"),
