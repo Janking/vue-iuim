@@ -55,7 +55,7 @@ body{
   background-color: #fafafa;
 }
 @import './assets/awesome_font/css/font-awesome.min.css';
-
+@import './assets/markdown.scss';
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

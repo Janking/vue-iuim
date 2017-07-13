@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~scss-kit';
 .page-title {
   font-size: rem(40);
@@ -42,8 +42,9 @@
   &:hover{
     background-color: #fafafa;
   }
+  .fa{color: #3aa8e3;}
 }
-.fa{color: #3aa8e3;}
+
 </style>
 <script>
 import {js,css} from '../../src/componentList';

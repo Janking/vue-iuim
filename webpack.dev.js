@@ -20,7 +20,8 @@ module.exports = {
     alias: {
       '@': resolve('./examples/'),
       'vue$': 'vue/dist/vue.esm.js',
-      'scss-kit': path.resolve(__dirname, './src/scss-kit/_index.scss')
+      'scss-kit': path.resolve(__dirname, './src/scss-kit/_index.scss'),
+      'js-component': path.resolve(__dirname, './src/js-component')
     }
   },
   module: {
@@ -47,6 +48,19 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]
+      },
+      {
+        test: /\.md$/,
+        use: [{
+            loader: "html-loader"
+          },
+          {
+            loader: "markdown-loader",
+            options: {
+              /* your options here */
+            }
+          }
+        ]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

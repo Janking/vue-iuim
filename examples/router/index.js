@@ -11,7 +11,7 @@ export default new Router({
       path: '/welcome',
       component: resolve => require(['../pages/Welcome.vue'], resolve),
       meta: {
-        title: '欢饮体验vue-iuim'
+        title: '欢迎体验vue-iuim'
       }
     }, {
       path: '/home',
@@ -19,6 +19,20 @@ export default new Router({
       meta: {
         title: '组件列表'
       }
+    },
+    {
+      path: '/home/display',
+      component: resolve => require(['../pages/layouts/Display.vue'], resolve),
+      meta: {
+        title: '演示'
+      },
+      children: [{
+        path: 'loading',
+        component: resolve => require(['../components/Loading.vue'], resolve),
+        meta: {
+          title: 'loading'
+        }
+      }]
     }
   ]
 });
