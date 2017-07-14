@@ -1,2 +1,3 @@
 # vue-iuim
-mobile ui library for vue2.x
+
+基于 Vue 2.x 开发的移动端UI组件库，尽最大的努力做到 **易于调用** ，**易于使用**
