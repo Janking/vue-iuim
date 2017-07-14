@@ -52,7 +52,10 @@ table {
 }
 
 body{
-  background-color: #fafafa;
+  background-color: #fff;
+}
+button:focus{
+  outline: none;
 }
 @import './assets/awesome_font/css/font-awesome.min.css';
 @import './assets/markdown.scss';

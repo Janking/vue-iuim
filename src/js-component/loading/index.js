@@ -16,38 +16,55 @@ const loadingTemplate = `<svg version="1.1" id="loading-svg" xmlns="http://www.w
 let contextEl;
 let guid = 1;
 let ELEMENT_CACHE = {};
+let TIMER1 = {};
+let TIMER2 = {};
 
 function getUid() {
   return guid++;
 }
 
-function getTransitionEnd() {
-  var t,
-    el = document.createElement('surface'),
+let transitionEnd = (function () {
+  let name,
+    el = document.createElement('detect'),
     transitions = {
       'transition': 'transitionend',
       'OTransition': 'oTransitionEnd',
       'MozTransition': 'transitionend',
       'WebkitTransition': 'webkitTransitionEnd'
-    }
+    };
 
-  for (t in transitions) {
-    if (el.style[t] !== undefined) {
-      return transitions[t];
+  for (name in transitions) {
+    if (el.style[name] !== undefined) {
+      return transitions[name];
     }
   }
-}
+})();
 
 function toggle(context, selector, value) {
-  if (context !== document.body) {
-    context.classList[value ? 'add' : 'remove']('iui-loading-wrap');
-  }
+  let id = selector.getAttribute('data-loading-id');
+  let currentElem = ELEMENT_CACHE[id];
+
   if (value) {
-    context.appendChild(ELEMENT_CACHE[selector.getAttribute('data-loading-id')]);
+    if (context !== document.body) {
+      context.classList.add('iui-loading-wrap');
+    }
+    currentElem.classList.add('fade');
+    TIMER1[id] = setTimeout(() => {
+      clearTimeout(TIMER1[id]);
+      currentElem.classList.add('in');
+    }, 30);
   } else {
-    let currentEl = ELEMENT_CACHE[selector.getAttribute('data-loading-id')];
-    currentEl.remove();
+    currentElem.classList.remove('in');
+    TIMER2[id] = setTimeout(() => {
+      clearTimeout(TIMER2[id]);
+      currentElem.classList.remove('fade');
+
+      if (context !== document.body) {
+        context.classList.add('iui-loading-wrap');
+      }
+    }, 300);
   }
+
 }
 
 const config = {
@@ -63,7 +80,7 @@ const config = {
     loadingEl.innerHTML = loadingTemplate;
     el.setAttribute('data-loading-id', cacheKey);
     ELEMENT_CACHE[cacheKey] = loadingEl;
-    toggle(contextEl, el, value);
+    contextEl.appendChild(loadingEl)
   },
   update(el, binding) {
     let value = typeof binding.value === 'object' ? binding.value.value : binding.value;
@@ -81,9 +98,8 @@ const config = {
 };
 
 export default {
-  config,
   install: function (Vue) {
     if (this.installed) return;
-    Vue.directive('loading', this.config);
+    Vue.directive('loading', config);
   }
 }
