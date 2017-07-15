@@ -94,7 +94,7 @@ export default {
       default: 'top-center'
     }
   },
-  data () {
+  data() {
     return {
       state: false,
       initZindex: getZindex(),
@@ -107,7 +107,7 @@ export default {
     }
   },
   methods: {
-    toggle (event) {
+    toggle(event) {
       let isBackdrop = event.target.className.indexOf('iuimPopover-backdrop') > -1
       this.state = !isBackdrop
     },
@@ -131,7 +131,7 @@ export default {
       next()
     }
   },
-  mounted () {
+  mounted() {
     let selector = this.$el
     let relativeElem = selector.children.length ? selector.children[0] : selector
     this.wrapDipslay = window.getComputedStyle(relativeElem).getPropertyValue('display')

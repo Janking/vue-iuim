@@ -19,7 +19,7 @@ let ELEMENT_CACHE = {}
 let TIMER1 = {}
 let TIMER2 = {}
 
-function getUid () {
+function getUid() {
   return guid++
 }
 
@@ -40,7 +40,7 @@ function getUid () {
 //   }
 // })()
 
-function toggle (context, selector, value) {
+function toggle(context, selector, value) {
   let id = selector.getAttribute('data-loading-id')
   let currentElem = ELEMENT_CACHE[id]
 
@@ -67,7 +67,7 @@ function toggle (context, selector, value) {
 }
 
 const config = {
-  inserted (el, binding) {
+  inserted(el, binding) {
     // 有无配置参数
     let options = typeof binding.value === 'object' ? binding.value : null
     let loadingEl = document.createElement('div')
@@ -81,11 +81,11 @@ const config = {
     ELEMENT_CACHE[cacheKey] = loadingEl
     contextEl.appendChild(loadingEl)
   },
-  update (el, binding) {
+  update(el, binding) {
     let value = typeof binding.value === 'object' ? binding.value.value : binding.value
     toggle(contextEl, el, value)
   },
-  unbind () {
+  unbind() {
     for (let name in ELEMENT_CACHE) {
       ELEMENT_CACHE[name].remove()
       let wrapArr = Array.prototype.slice.call(document.querySelectorAll('.iui-loading-wrap'), 0)
