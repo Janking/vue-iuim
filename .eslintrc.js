@@ -4,7 +4,10 @@ module.exports = {
     "sourceType": "module"
   },
   "extends": "standard",
-  plugins: [
+  "plugins": [
     'html'
-  ]
+  ],
+  "rules":{
+    "space-before-function-paren":0
+  }
 }
