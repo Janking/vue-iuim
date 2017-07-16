@@ -10,28 +10,28 @@
 </template>
 
 <script>
-import doc from './Loading.md';
-import loading from 'js-component/loading';
-import Vue from 'vue';
-let timer = null;
-Vue.use(loading);
+import doc from './Loading.md'
+import loading from 'js-component/loading'
+import Vue from 'vue'
+let timer = null
+Vue.use(loading)
 
 export default {
-  data() {
+  data () {
     return {
       doc: doc,
-      loading:false,
-      loading2:false
+      loading: false,
+      loading2: false
     }
   },
-  methods:{
-    toggle(name){
-      let _this = this;
-      _this[name] = !_this[name];
-      timer = setTimeout(function(){
-        clearTimeout(timer);
-        _this[name] = !_this[name];
-      },3000)
+  methods: {
+    toggle (name) {
+      let _this = this
+      _this[name] = !_this[name]
+      timer = setTimeout(function () {
+        clearTimeout(timer)
+        _this[name] = !_this[name]
+      }, 3000)
     }
   }
 }

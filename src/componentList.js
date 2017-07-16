@@ -22,9 +22,7 @@ export const js = [{
   name: 'datepicker',
   path: '/home/display/datepicker',
   icon: 'fa-send'
-}];
-
-
+}]
 
 export const css = [{
   name: 'button',
@@ -46,4 +44,4 @@ export const css = [{
   name: 'Input',
   path: '/home/display/Input',
   icon: 'fa-send'
-}];
+}]

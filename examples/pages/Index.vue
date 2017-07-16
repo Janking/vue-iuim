@@ -47,12 +47,12 @@
 
 </style>
 <script>
-import {js,css} from '../../src/componentList';
+import {js, css} from '../../src/componentList'
 export default {
-  data(){
+  data () {
     return {
-      list : js,
-      list2 :css
+      list: js,
+      list2: css
     }
   }
 }

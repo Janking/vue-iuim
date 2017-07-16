@@ -46,25 +46,23 @@
 </template>
 
 <script>
-import doc from './Popover.md';
-import {iuimPopover} from 'js-component/popover';
-import Vue from 'vue';
-import mock from 'mockjs';
+import doc from './Popover.md'
+import {iuimPopover} from 'js-component/popover'
+// import Vue from 'vue'
+// import mock from 'mockjs'
 
 export default {
-  components:{
+  components: {
     iuimPopover
   },
-  data() {
+  data () {
     return {
       doc: doc,
-      content:'按时；德里克放假啊；历史课打哦器物认束带结发拉克丝京东方；离开家请饿哦无人啊；施蒂利克房间里卡三等奖分路器噢诶如；阿拉山口地方交流卡萨丁剑锋李；及 world'
+      content: '按时；德里克放假啊；历史课打哦器物认束带结发拉克丝京东方；离开家请饿哦无人啊；施蒂利克房间里卡三等奖分路器噢诶如；阿拉山口地方交流卡萨丁剑锋李；及 world'
     }
   },
-  methods:{
-    toggle(name){
-      
-    }
+  methods: {
+    toggle (name) {}
   }
 }
 </script>

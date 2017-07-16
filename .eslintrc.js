@@ -1,7 +1,10 @@
-{
+module.exports = {
   "parserOptions": {
     "ecmaVersion": 7,
     "sourceType": "module"
   },
-  "extends": "standard"
+  "extends": "standard",
+  plugins: [
+    'html'
+  ]
 }

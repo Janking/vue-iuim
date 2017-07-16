@@ -11,95 +11,94 @@ const loadingTemplate = `<svg version="1.1" id="loading-svg" xmlns="http://www.w
       dur="0.5s"
       repeatCount="indefinite"/>
     </path>
-  </svg>`;
+  </svg>`
 
-let contextEl;
-let guid = 1;
-let ELEMENT_CACHE = {};
-let TIMER1 = {};
-let TIMER2 = {};
+let contextEl
+let guid = 1
+let ELEMENT_CACHE = {}
+let TIMER1 = {}
+let TIMER2 = {}
 
-function getUid() {
-  return guid++;
+function getUid () {
+  return guid++
 }
 
-let transitionEnd = (function () {
-  let name,
-    el = document.createElement('detect'),
-    transitions = {
-      'transition': 'transitionend',
-      'OTransition': 'oTransitionEnd',
-      'MozTransition': 'transitionend',
-      'WebkitTransition': 'webkitTransitionEnd'
-    };
+// let transitionEnd = (function () {
+//   let name
+//   let el = document.createElement('detect')
+//   let transitions = {
+//     'transition': 'transitionend',
+//     'OTransition': 'oTransitionEnd',
+//     'MozTransition': 'transitionend',
+//     'WebkitTransition': 'webkitTransitionEnd'
+//   }
 
-  for (name in transitions) {
-    if (el.style[name] !== undefined) {
-      return transitions[name];
-    }
-  }
-})();
+//   for (name in transitions) {
+//     if (el.style[name] !== undefined) {
+//       return transitions[name]
+//     }
+//   }
+// })()
 
-function toggle(context, selector, value) {
-  let id = selector.getAttribute('data-loading-id');
-  let currentElem = ELEMENT_CACHE[id];
+function toggle (context, selector, value) {
+  let id = selector.getAttribute('data-loading-id')
+  let currentElem = ELEMENT_CACHE[id]
 
   if (value) {
     if (context !== document.body) {
-      context.classList.add('iui-loading-wrap');
+      context.classList.add('iui-loading-wrap')
     }
-    currentElem.classList.add('fade');
+    currentElem.classList.add('fade')
     TIMER1[id] = setTimeout(() => {
-      clearTimeout(TIMER1[id]);
-      currentElem.classList.add('in');
-    }, 30);
+      clearTimeout(TIMER1[id])
+      currentElem.classList.add('in')
+    }, 30)
   } else {
-    currentElem.classList.remove('in');
+    currentElem.classList.remove('in')
     TIMER2[id] = setTimeout(() => {
-      clearTimeout(TIMER2[id]);
-      currentElem.classList.remove('fade');
+      clearTimeout(TIMER2[id])
+      currentElem.classList.remove('fade')
 
       if (context !== document.body) {
-        context.classList.add('iui-loading-wrap');
+        context.classList.add('iui-loading-wrap')
       }
-    }, 300);
+    }, 300)
   }
-
 }
 
 const config = {
-  inserted(el, binding) {
+  inserted (el, binding) {
     // 有无配置参数
-    let options = typeof binding.value === 'object' ? binding.value : null;
-    let loadingEl = document.createElement('div');
-    let cacheKey = 'iui-loading-' + getUid();
-    let value = options ? options.value : binding.value;
+    let options = typeof binding.value === 'object' ? binding.value : null
+    let loadingEl = document.createElement('div')
+    let cacheKey = 'iui-loading-' + getUid()
+    // let value = options ? options.value : binding.value
     // 如果有,context为options.context 或者 document.body
-    contextEl = options && options.context ? (document.querySelector(options.context) || document.body) : binding.modifiers.fullscreen ? document.body : el;
-    loadingEl.className = 'iui-loading';
-    loadingEl.innerHTML = loadingTemplate;
-    el.setAttribute('data-loading-id', cacheKey);
-    ELEMENT_CACHE[cacheKey] = loadingEl;
+    contextEl = options && options.context ? (document.querySelector(options.context) || document.body) : binding.modifiers.fullscreen ? document.body : el
+    loadingEl.className = 'iui-loading'
+    loadingEl.innerHTML = loadingTemplate
+    el.setAttribute('data-loading-id', cacheKey)
+    ELEMENT_CACHE[cacheKey] = loadingEl
     contextEl.appendChild(loadingEl)
   },
-  update(el, binding) {
-    let value = typeof binding.value === 'object' ? binding.value.value : binding.value;
-    toggle(contextEl, el, value);
+  update (el, binding) {
+    let value = typeof binding.value === 'object' ? binding.value.value : binding.value
+    toggle(contextEl, el, value)
   },
-  unbind() {
+  unbind () {
     for (let name in ELEMENT_CACHE) {
-      ELEMENT_CACHE[name].remove();
-      let wrapArr = Array.prototype.slice.call(document.querySelectorAll('.iui-loading-wrap'), 0);
+      ELEMENT_CACHE[name].remove()
+      let wrapArr = Array.prototype.slice.call(document.querySelectorAll('.iui-loading-wrap'), 0)
       wrapArr.forEach(function (element) {
         element.classList.remove('iui-loading-wrap')
-      });
+      })
     }
   }
-};
+}
 
 export default {
   install: function (Vue) {
-    if (this.installed) return;
-    Vue.directive('loading', config);
+    if (this.installed) return
+    Vue.directive('loading', config)
   }
 }

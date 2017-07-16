@@ -13,7 +13,7 @@ module.exports = {
   },
   output: {
     path: __dirname + '/dist',
-    filename: "[name].[hash].js"
+    filename: '[name].[hash].js'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json', '.scss'],
@@ -26,53 +26,57 @@ module.exports = {
   },
   module: {
     rules: [{
-        enforce: "pre",
-        test: /\.[js|vue]$/,
-        loader: "eslint-loader",
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            scss: 'vue-style-loader!css-loader!sass-loader'
-          }
-        }
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')]
-      },
-      {
-        test: /\.md$/,
-        use: [{
-            loader: "html-loader"
-          },
-          {
-            loader: "markdown-loader",
-            options: {
-              /* your options here */
-            }
-          }
-        ]
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          // name: utils.assetsPath('img/[name].[hash:7].[ext]')
-        }
-      },
-      {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          // name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+      test: /\.(js|vue)$/,
+      loader: 'eslint-loader',
+      include:[resolve('examples'),resolve('src')],
+      enforce: 'pre',
+      options: {
+        formatter: require('eslint-friendly-formatter')
+      }
+    },
+    {
+      test: /\.vue$/,
+      loader: 'vue-loader',
+      options: {
+        loaders: {
+          scss: 'vue-style-loader!css-loader!sass-loader'
         }
       }
+    },
+    {
+      test: /\.js$/,
+      loader: 'babel-loader',
+      include: [resolve('src'), resolve('test')]
+    },
+    {
+      test: /\.md$/,
+      use: [{
+        loader: "html-loader"
+      },
+      {
+        loader: "markdown-loader",
+        options: {
+          /* your options here */
+        }
+      }
+      ]
+    },
+    {
+      test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+      loader: 'url-loader',
+      options: {
+        limit: 10000,
+        // name: utils.assetsPath('img/[name].[hash:7].[ext]')
+      }
+    },
+    {
+      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+      loader: 'url-loader',
+      options: {
+        limit: 10000,
+        // name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+      }
+    }
     ]
   },
   plugins: [
