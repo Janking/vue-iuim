@@ -700,3 +700,11 @@
 .markdown-body hr {
   border-bottom-color: #eee;
 }
+
+.btn {
+  text-decoration: none;
+  @extend %button-init;
+  @include button-variant(#fff, #4AA6FC, #4AA6FC);
+  @include button-size(rem(10), rem(70), rem(30), 1.4, rem(5));
+  margin: 0 rem(30)
+}

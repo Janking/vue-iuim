@@ -41,13 +41,6 @@ export default {
 @import '~scss-kit';
 @import '~js-component/loading/loading.scss';
 .loading {
-  .btn {
-    text-decoration: none;
-    @extend %button-init;
-    @include button-variant(#fff, #4AA6FC, #4AA6FC);
-    @include button-size(rem(10), rem(70), rem(30), 1.4, rem(5));
-    margin:0 rem(30)
-  }
   #{&}__demo{
     text-align: center;
     padding: rem(100) 0;

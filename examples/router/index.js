@@ -27,12 +27,20 @@ export default new Router({
         title: '演示'
       },
       children: [{
-        path: 'loading',
-        component: resolve => require(['../components/Loading.vue'], resolve),
-        meta: {
-          title: 'loading'
+          path: 'loading',
+          component: resolve => require(['../components/Loading.vue'], resolve),
+          meta: {
+            title: 'loading'
+          }
+        },
+        {
+          path: 'popover',
+          component: resolve => require(['../components/Popover.vue'], resolve),
+          meta: {
+            title: 'popover'
+          }
         }
-      }]
+      ]
     }
   ]
 });
