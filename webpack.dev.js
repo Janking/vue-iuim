@@ -1,6 +1,6 @@
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+// const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const path = require('path');
 
 function resolve(dir) {
@@ -12,7 +12,7 @@ module.exports = {
     app: './index.js'
   },
   output: {
-    path: __dirname + '/dist',
+    path: path.resolve(__dirname, '/dist'),
     filename: '[name].[hash].js'
   },
   resolve: {
@@ -28,7 +28,7 @@ module.exports = {
     rules: [{
       test: /\.(js|vue)$/,
       loader: 'eslint-loader',
-      include:[resolve('examples'),resolve('src')],
+      include: [resolve('examples'), resolve('src')],
       enforce: 'pre',
       options: {
         formatter: require('eslint-friendly-formatter')
@@ -51,10 +51,10 @@ module.exports = {
     {
       test: /\.md$/,
       use: [{
-        loader: "html-loader"
+        loader: 'html-loader'
       },
       {
-        loader: "markdown-loader",
+        loader: 'markdown-loader',
         options: {
           /* your options here */
         }
@@ -65,7 +65,7 @@ module.exports = {
       test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
       loader: 'url-loader',
       options: {
-        limit: 10000,
+        limit: 10000
         // name: utils.assetsPath('img/[name].[hash:7].[ext]')
       }
     },
@@ -73,7 +73,7 @@ module.exports = {
       test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
       loader: 'url-loader',
       options: {
-        limit: 10000,
+        limit: 10000
         // name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
       }
     }
@@ -89,7 +89,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 9000,
     inline: true,

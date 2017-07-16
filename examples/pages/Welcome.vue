@@ -1,19 +1,18 @@
 <template>
-<div class="welcome">
-  <div class="full-screen">
-    <div>
-      <h1>Vue-iuim</h1>
-      <br>
-      <a class="button-line" @touchstart="$router.push('/home')">Get Started</a>
+  <div class="welcome">
+    <div class="full-screen">
+      <div>
+        <h1>Vue-iuim</h1>
+        <br>
+        <a class="button-line" @touchstart="$router.push('/home')">Get Started</a>
+      </div>
     </div>
   </div>
-</div>
 </template>
 <style lang="scss">
-
 @import '~scss-kit';
 
-.welcome{
+.welcome {
   position: fixed;
   top: 0;
   right: 0;
@@ -86,7 +85,7 @@
 
 <script>
 export default {
-  mounted () {
+  mounted() {
 
   }
 }

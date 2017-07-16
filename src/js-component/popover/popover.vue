@@ -19,7 +19,7 @@ let getZindex = (function () {
 })()
 
 let getScrollTop = function (scrollEl) {
-  let scrollElem = scrollEl === 'body' ? document.body : document.querySelector(scrollEl) ? document.querySelector(scrollEl) : document.body
+  let scrollElem = document.querySelector(scrollEl) || document.body
   let top = scrollElem.scrollTop
   let left = scrollElem.scrollLeft
   return { top, left }
@@ -35,6 +35,7 @@ const OFFSET_MAP = {
     let st = scrollOffset.top
     // let bw = boxMatrix.width
     let bh = boxMatrix.height
+
     return {
       top: t + st - bh - (bh * 0.1),
       left: sl + l
@@ -65,17 +66,51 @@ const OFFSET_MAP = {
     let bh = boxMatrix.height
     return {
       top: t + st - bh - (bh * 0.1),
+      left: sl + l - (bw - w)
+    }
+  },
+  'bottom-left': (matrix, scrollOffset, boxMatrix) => {
+    // let w = matrix.width
+    let h = matrix.height
+    let l = matrix.left
+    let t = matrix.top
+    let sl = scrollOffset.left
+    let st = scrollOffset.top
+    // let bw = boxMatrix.width
+    let bh = boxMatrix.height
+
+    return {
+      top: t + st + h + (bh * 0.1),
+      left: sl + l
+    }
+  },
+  'bottom-center': (matrix, scrollOffset, boxMatrix) => {
+    let w = matrix.width
+    let h = matrix.height
+    let l = matrix.left
+    let t = matrix.top
+    let sl = scrollOffset.left
+    let st = scrollOffset.top
+    let bw = boxMatrix.width
+    let bh = boxMatrix.height
+    return {
+      top: t + st + h + (bh * 0.1),
       left: sl + l - (bw / 2) + (w / 2)
     }
   },
-  'bottom-left': () => {
-
-  },
-  'bottom-center': () => {
-
-  },
-  'bottom-right': () => {
-
+  'bottom-right': (matrix, scrollOffset, boxMatrix) => {
+    let w = matrix.width
+    let h = matrix.height
+    let l = matrix.left
+    let t = matrix.top
+    let sl = scrollOffset.left
+    let st = scrollOffset.top
+    let bw = boxMatrix.width
+    let bh = boxMatrix.height
+    return {
+      top: t + st + h + (bh * 0.1),
+      left: sl + l - (bw - w)
+    }
   }
 }
 
@@ -91,7 +126,7 @@ export default {
     },
     arrow: {
       type: String,
-      default: 'top-center'
+      default: 'bottom-right'
     }
   },
   data() {
@@ -121,6 +156,10 @@ export default {
 
       if (matrix.top < 0) {
         matrix = OFFSET_MAP[this.triangle.replace(/(\w+)-/, 'bottom-')](relativeElemMatrix, scrollOffset, box)
+      }
+
+      if (matrix.left < 0) {
+        matrix = OFFSET_MAP[this.triangle.replace(/-(\w+)/, '-left')](relativeElemMatrix, scrollOffset, box)
       }
 
       this.position = {
@@ -169,21 +208,22 @@ export default {
   z-index: 10000;
   padding: rem(20);
   border-radius: rem(5);
-  width: rem(400);
+  width: rem(500);
   white-space: normal;
   word-wrap: break-word;
   font-size: rem(28);
-  &.top-left:after {
+  text-align: left;
+  &:after {
     content: '';
     position: absolute;
+  }
+  &.top-left:after {
     top: 100%;
     left: 10%;
     margin-top: -1px;
-    @include triangle(rem(40), #fff transparent, down);
+    @include triangle(rem(30), #fff transparent, down);
   }
   &.top-center:after {
-    content: '';
-    position: absolute;
     top: 100%;
     left: 50%;
     margin-top: -1px;
@@ -191,36 +231,30 @@ export default {
     @include triangle(rem(30), #fff transparent, down);
   }
   &.top-right:after {
-    content: '';
-    position: absolute;
     top: 100%;
-    left: 10%;
+    right: 10%;
     margin-top: -1px;
     @include triangle(rem(30), #fff transparent, down);
   }
   &.bottom-left:after {
-    content: '';
-    position: absolute;
-    top: 100%;
+    top: rem(-15);
     left: 10%;
-    margin-top: -1px;
-    @include triangle(rem(30), #fff transparent, down);
+    margin-top: 1px;
+    @include triangle(rem(30), #fff transparent, up);
   }
   &.bottom-center:after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 10%;
-    margin-top: -1px;
-    @include triangle(rem(30), #fff transparent, down);
+    top: rem(-15);
+    left: 50%;
+    margin-top: 1px;
+    margin-left: rem(-15);
+    @include triangle(rem(30), #fff transparent, up);
   }
   &.bottom-right:after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 10%;
-    margin-top: -1px;
-    @include triangle(rem(30), #fff transparent, down);
+    top: rem(-15);
+    right: 10%;
+    margin-top: 1px;
+    margin-left: rem(-15);
+    @include triangle(rem(30), #fff transparent, up);
   }
 }
 </style>
