@@ -116,6 +116,7 @@ const OFFSET_MAP = {
 
 export default {
   name: 'iuimPopover',
+  version: '1.1.0',
   props: {
     content: {
       type: String
