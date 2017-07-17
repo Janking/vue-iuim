@@ -9,7 +9,7 @@ function resolve(dir) {
 
 module.exports = {
   entry: {
-    app: './index.js'
+    app: './examples/main.js'
   },
   output: {
     path: path.resolve(__dirname, '/dist'),
@@ -18,7 +18,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json', '.scss'],
     alias: {
-      '@': resolve('./examples/'),
+      '@': path.resolve(__dirname, './examples/'),
       'vue$': 'vue/dist/vue.esm.js',
       'scss-kit': path.resolve(__dirname, './src/scss-kit/_index.scss'),
       'js-component': path.resolve(__dirname, './src/js-component')
@@ -46,7 +46,10 @@ module.exports = {
     {
       test: /\.js$/,
       loader: 'babel-loader',
-      include: [resolve('src'), resolve('test')]
+      include: [resolve('src'), resolve('examples')],
+      options: {
+        presets: ['env']
+      }
     },
     {
       test: /\.md$/,
