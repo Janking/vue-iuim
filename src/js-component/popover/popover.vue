@@ -180,7 +180,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../scss-kit';
+@import '../../scss-kit/_index.scss';
 .popover-enter-active {
   transition: opacity .3s ease;
 }

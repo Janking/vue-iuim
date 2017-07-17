@@ -38,7 +38,6 @@ export default {
 
 <style lang="scss">
 @import '~scss-kit';
-@import '~js-component/loading/loading.scss';
 .loading {
   #{&}__demo {
     text-align: center;

@@ -1,13 +1,13 @@
 import loading from './src/js-component/loading'
 import popover from './src/js-component/popover'
 
-const COMPONENT = [loading, popover]
+const components = [loading, popover]
 
-module.exports = {
+export default {
   install: function (Vue) {
     if (this.installed) return
 
-    COMPONENT.forEach((item, index) => {
+    components.forEach((item, index) => {
       Vue.use(item)
     })
   }
