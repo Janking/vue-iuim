@@ -1,5 +1,5 @@
 <template>
-  <div class="iuimPopover" @touchstart="toggle" :style="{display:wrapDipslay}">
+  <div class="iuimPopover" @click="toggle" :style="{display:wrapDipslay}">
     <slot></slot>
     <transition name="popover" mode="out-in" @enter="enter">
       <div class="iuimPopover-context" v-if="state">
@@ -127,7 +127,7 @@ export default {
     },
     arrow: {
       type: String,
-      default: 'bottom-right'
+      default: 'bottom-left'
     }
   },
   data() {
