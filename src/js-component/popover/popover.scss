@@ -1,0 +1,92 @@
+@import "../../scss-kit/_index.scss";
+
+.popover-enter-active {
+    transition: opacity .3s ease;
+}
+
+.popover-leave-active {
+    transition: opacity .3s ease;
+}
+
+.popover-enter,
+.popover-leave-to {
+    opacity: 0;
+}
+
+.iuimPopover-backdrop {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(#000, 0.5);
+}
+
+.iuimPopover-content {
+    position: absolute;
+    background-color: #fff;
+    z-index: 10000;
+    padding: rem(20);
+    border-radius: rem(5);
+    width: rem(500);
+    white-space: normal;
+    word-wrap: break-word;
+    font-size: rem(28);
+    text-align: left;
+
+    &:after {
+        content: '';
+        position: absolute;
+    }
+
+    &.top-left:after {
+        top: 100%;
+        left: 10%;
+        margin-top: -1px;
+
+        @include triangle(rem(30), #fff transparent, down);
+    }
+
+    &.top-center:after {
+        top: 100%;
+        left: 50%;
+        margin-top: -1px;
+        margin-left: rem(-15);
+
+        @include triangle(rem(30), #fff transparent, down);
+    }
+
+    &.top-right:after {
+        top: 100%;
+        right: 10%;
+        margin-top: -1px;
+
+        @include triangle(rem(30), #fff transparent, down);
+    }
+
+    &.bottom-left:after {
+        top: rem(-15);
+        left: 10%;
+        margin-top: 1px;
+
+        @include triangle(rem(30), #fff transparent, up);
+    }
+
+    &.bottom-center:after {
+        top: rem(-15);
+        left: 50%;
+        margin-top: 1px;
+        margin-left: rem(-15);
+
+        @include triangle(rem(30), #fff transparent, up);
+    }
+
+    &.bottom-right:after {
+        top: rem(-15);
+        right: 10%;
+        margin-top: 1px;
+        margin-left: rem(-15);
+
+        @include triangle(rem(30), #fff transparent, up);
+    }
+}

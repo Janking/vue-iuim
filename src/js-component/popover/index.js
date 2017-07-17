@@ -1,3 +1,4 @@
+import './popover.scss'
 import popover from './popover.vue'
 
 export default {
