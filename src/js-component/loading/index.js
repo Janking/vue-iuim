@@ -34,7 +34,8 @@ export default {
           }
         }
       },
-      unbind() {
+      unbind(el, binding) {
+        el.instance.$el.remove()
       }
     }
 
