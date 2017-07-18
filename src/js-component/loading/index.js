@@ -36,6 +36,7 @@ export default {
       },
       unbind(el, binding) {
         el.instance.$el.remove()
+        console.log(el)
       }
     }
 
