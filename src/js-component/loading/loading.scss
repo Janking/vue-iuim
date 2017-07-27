@@ -7,7 +7,34 @@ $iuim-loading-z-index: 9999;
 
     .iuim-loading {
         position: absolute;
+        background: transparent;
+        background-color: rgba(255, 255, 255, 0.85);
+
+        .iuim-loading-svg {
+            background: none;
+            padding: 0;
+            width: 100%;
+        }
+
+
+        svg {
+            width: rem(100);
+            height: rem(100);
+        }
+
+        svg path,
+        svg circle,
+        svg rect {
+            fill: #3488eb;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .iuim-loading-text{
+            color: #3488eb;
+        }
     }
+    
+    
 }
 
 .iuim-loading {
@@ -16,30 +43,31 @@ $iuim-loading-z-index: 9999;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.55);
+    background: transparent;
     z-index: $iuim-loading-z-index;
 
     .iuim-loading-svg {
+        background-color: rgba(0, 0, 0, 0.95);
         position: absolute;
         z-index: $iuim-loading-z-index + 100;
         transform: translateX(-50%) translateY(-30%);
         left: 50%;
         top: 30%;
-        width: 100%;
-        height: rem(100);
         text-align: center;
+        border-radius: rem(10);
+        padding: rem(20);
     }
 
     .iuim-loading-text {
         text-align: center;
         color: #fff;
-        font-size: rem(30);
-        padding: rem(20) 0;
+        font-size: rem(26);
+        margin-top: rem(15);
     }
 
     svg {
-        width: rem(100);
-        height: rem(100);
+        width: rem(70);
+        height: rem(70);
     }
 
     svg path,

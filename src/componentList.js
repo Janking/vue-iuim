@@ -5,6 +5,10 @@ export const js = [{
 }, {
   name: 'loading',
   path: '/home/display/loading',
+  icon: 'fa-circle-o-notch'
+}, {
+  name: 'spinner',
+  path: '/home/display/spinner',
   icon: 'fa-spinner'
 }, {
   name: 'validate',

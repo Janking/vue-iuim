@@ -6,7 +6,6 @@ const components = [loading, popover]
 export default {
   install: function (Vue) {
     if (this.installed) return
-
     components.forEach((item, index) => {
       Vue.use(item)
     })

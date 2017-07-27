@@ -2,7 +2,7 @@
   <div class="display">
     <div class="display__header">
       <div class="col-left" @click="$router.go(-1)">
-        <i class="fa fa-angle-left fa-2x"></i>
+        <i class="fa fa-angle-left fa-3x"></i>
       </div>
       <div class="col-center">{{$route.query.title}}</div>
       <div class="col-right">&nbsp;</div>
@@ -24,7 +24,7 @@ export default {
 .display {
   #{&}__header {
     @include clearfix;
-    background-color: lighten(#3aa8e3, 20%);
+    background-color: lighten(#3aa8e3, 10%);
     color: #fff;
     line-height: 1;
     padding: rem(10) rem(20);
