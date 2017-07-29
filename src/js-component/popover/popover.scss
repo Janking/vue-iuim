@@ -14,18 +14,18 @@
 }
 
 .iuimPopover-backdrop {
-    position: fixed;
+    position: absolute;
     left: 0;
     top: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(#000, 0.5);
+    width: 100%;
+    opacity: .5;
+    background: #000;
 }
 
 .iuimPopover-content {
     position: absolute;
-    background-color: #fff;
     z-index: 10000;
+    background-color: #fff;
     padding: rem(20);
     border-radius: rem(5);
     width: rem(500);
@@ -33,6 +33,8 @@
     word-wrap: break-word;
     font-size: rem(28);
     text-align: left;
+    line-height: 1.456;
+    color: #666;
 
     &:after {
         content: '';

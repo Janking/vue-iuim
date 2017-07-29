@@ -16,25 +16,24 @@ $iuim-loading-z-index: 9999;
             width: 100%;
         }
 
-
         svg {
             width: rem(100);
             height: rem(100);
         }
 
-        svg path,
-        svg circle,
-        svg rect {
+        .spinner-type-1 path,
+        .spinner-type-3 {
             fill: #3488eb;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
-        .iuim-loading-text{
+
+        .iuim-loading-text {
             color: #3488eb;
         }
+
+        .spinner-type-2 circle {
+            stroke: #3488eb;
+        }
     }
-    
-    
 }
 
 .iuim-loading {
@@ -68,12 +67,80 @@ $iuim-loading-z-index: 9999;
     svg {
         width: rem(70);
         height: rem(70);
-    }
-
-    svg path,
-    svg rect {
-        fill: #eee;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    .spinner-type-1 path,
+    .spinner-type-3 {
+        fill: #eee;
+    }
+
+    $offset: 140;
+    $duration: 1.4s;
+
+    .spinner-type-2 {
+        animation: rotator $duration linear infinite;
+
+        circle {
+            stroke-dasharray: $offset;
+            stroke-dashoffset: 0;
+            transform-origin: center;
+            stroke: #eee;
+            animation: dash $duration ease-in-out infinite;
+        }
+    }
+
+    @keyframes rotator {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(270deg);
+        }
+    }
+
+    // @keyframes colors {
+    //     0% {
+    //         // stroke: #4285F4;
+    //         stroke: #fff;
+    //     }
+
+    //     25% {
+    //         // stroke: #DE3E35;
+    //         stroke: #fff;
+    //     }
+
+    //     50% {
+    //         // stroke: #F7C223;
+    //         stroke: #fff;
+    //     }
+
+    //     75% {
+    //         // stroke: #1B9A59;
+    //         stroke: #fff;
+    //     }
+
+    //     100% {
+    //         // stroke: #4285F4;
+    //         stroke: #fff;
+    //     }
+    // }
+
+    @keyframes dash {
+        0% {
+            stroke-dashoffset: $offset;
+        }
+
+        50% {
+            stroke-dashoffset: $offset / 4;
+            transform: rotate(135deg);
+        }
+
+        100% {
+            stroke-dashoffset: $offset;
+            transform: rotate(450deg);
+        }
     }
 }

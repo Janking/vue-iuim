@@ -1,13 +1,10 @@
 <template>
-  <div class="iuimPopover" @click="toggle" :style="{display:wrapDipslay}">
-    <slot></slot>
-    <transition name="popover" mode="out-in" @enter="enter">
-      <div class="iuimPopover-context" v-if="state">
-        <div class="iuimPopover-backdrop" :style="{'z-index':initZindex}"></div>
-        <div class="iuimPopover-content" :class="triangle" :style="position">{{template}}</div>
-      </div>
-    </transition>
-  </div>
+  <transition name="popover" mode="out-in" @enter="enter" @after-enter="afterEnter">
+    <div v-if="state">
+      <div class="iuimPopover-content" :class="triangle" :style="position">{{template}}</div>
+      <div class="iuimPopover-backdrop" :style="{height:contentHeight}" @click="hide"></div>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -128,53 +125,57 @@ export default {
     arrow: {
       type: String,
       default: 'bottom-left'
+    },
+    active: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
-      state: false,
+      state: this.active,
       initZindex: getZindex(),
       template: this.content,
       position: {},
       wrapDipslay: '',
       scroller: this.scrollEl,
-      triangle: this.arrow
-      // triSize:this.triangleSize
+      triangle: this.arrow,
+      contentHeight: '100%'
     }
   },
   methods: {
-    toggle(event) {
-      let isBackdrop = event.target.className.indexOf('iuimPopover-backdrop') > -1
-      this.state = !isBackdrop
+    show() {
+      this.state = true
     },
-    enter: function (el, next) {
-      let selector = this.$el
-      let relativeElem = selector.children.length ? selector.children[0] : selector
-      let relativeElemMatrix = relativeElem.getBoundingClientRect()
+    hide() {
+      this.state = false
+    },
+    enter(el, next) {
+      this.contentHeight = document.querySelector(this.scrollEl).getBoundingClientRect().height + 'px'
+      next()
+    },
+    afterEnter(el, next) {
+      let relativeElemMatrix = this.targetEl.getBoundingClientRect()
       let scrollOffset = getScrollTop(this.scrollEl)
-      let box = this.$el.querySelector('.iuimPopover-content').getBoundingClientRect()
+      let box = el.querySelector('.iuimPopover-content').getBoundingClientRect()
       let matrix = OFFSET_MAP[this.triangle](relativeElemMatrix, scrollOffset, box)
-
+      let newArrow
       if (matrix.top < 0) {
-        matrix = OFFSET_MAP[this.triangle.replace(/(\w+)-/, 'bottom-')](relativeElemMatrix, scrollOffset, box)
+        newArrow = this.triangle.replace(/(\w+)-/, 'bottom-')
+        matrix = OFFSET_MAP[newArrow](relativeElemMatrix, scrollOffset, box)
+        this.triangle = newArrow
       }
-
       if (matrix.left < 0) {
-        matrix = OFFSET_MAP[this.triangle.replace(/-(\w+)/, '-left')](relativeElemMatrix, scrollOffset, box)
+        newArrow = this.triangle.replace(/(-\w+)/, '-left')
+        matrix = OFFSET_MAP[newArrow](relativeElemMatrix, scrollOffset, box)
+        this.triangle = newArrow
       }
-
       this.position = {
         'left': matrix.left + 'px',
         'top': matrix.top + 'px',
         'z-index': getZindex()
       }
-      next()
     }
-  },
-  mounted() {
-    let selector = this.$el
-    let relativeElem = selector.children.length ? selector.children[0] : selector
-    this.wrapDipslay = window.getComputedStyle(relativeElem).getPropertyValue('display')
   }
 }
 </script>

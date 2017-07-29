@@ -5,12 +5,14 @@
     <h2>Examples</h2>
     <div class="loading__demo">
       <button v-loading="{visible:loading}" class="btn" @click="toggle('loading')">Fullscreen</button>
-      <button class="btn" v-loading="{context:'.loading__demo',visible:loading2}" @click="toggle('loading2')">Local Loading</button>
-      <button class="btn" v-loading="{context:'.loading__demo',visible:loading8,type:3,text:'正在加载'}" @click="toggle('loading8')">Local Loading Text</button>
-      <button class="btn" v-loading="{type:1,visible:loading3}" @click="toggle('loading3')">Loading Type 1</button>
-      <button class="btn" v-loading="{type:2,visible:loading4}" @click="toggle('loading4')">Loading Type 2</button>
-      <button class="btn" v-loading="{type:3,visible:loading5}" @click="toggle('loading5')">Loading Type 3</button>
-      <button class="btn" v-loading="{type:1,visible:loading7,text:'正在加载'}" @click="toggle('loading7')">Loading Text</button>
+      <button class="btn" v-loading="{context:'.loading__demo',visible:loading1}" @click="toggle('loading1')">Local Loading</button>
+      <button class="btn" v-loading="{context:'.loading__demo',visible:loading2,type:2}" @click="toggle('loading2')">Local Loading 2</button>
+      <button class="btn" v-loading="{context:'.loading__demo',visible:loading3,type:3}" @click="toggle('loading3')">Local Loading 3</button>
+      <button class="btn" v-loading="{context:'.loading__demo',visible:loading4,type:2,text:'正在加载'}" @click="toggle('loading4')">Local Loading Text</button>
+      <button class="btn" v-loading="{type:1,visible:loading5}" @click="toggle('loading5')">Loading Type 1</button>
+      <button class="btn" v-loading="{type:2,visible:loading6}" @click="toggle('loading6')">Loading Type 2</button>
+      <button class="btn" v-loading="{type:3,visible:loading7}" @click="toggle('loading7')">Loading Type 3</button>
+      <button class="btn" v-loading="{type:2,visible:loading8,text:'正在加载'}" @click="toggle('loading8')">Loading Text</button>
     </div>
   </div>
 </template>
@@ -24,6 +26,7 @@ export default {
   data() {
     return {
       loading: false,
+      loading1: false,
       loading2: false,
       loading3: false,
       loading4: false,
