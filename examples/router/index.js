@@ -38,6 +38,13 @@ const routeMap = {
       meta: {
         title: 'popover'
       }
+    },
+    {
+      path: 'dialog',
+      component: resolve => require(['../components/Dialog.vue'], resolve),
+      meta: {
+        title: 'dialog'
+      }
     }]
   }]
 }

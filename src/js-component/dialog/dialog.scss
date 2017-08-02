@@ -1,0 +1,142 @@
+/**
+ * mixin : gradient
+ * $bgColor     [background color]
+ * $bgOpacity   [opacity]
+ * $supportIE   [compact IE]
+ */
+
+@mixin gradient($bgColor, $bgOpacity, $supportIE:true) {
+    background-color: rgba($bgColor, $bgOpacity);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{ie-hex-str(rgba($bgColor,$bgOpacity))}, endColorstr=#{ie-hex-str(rgba($bgColor,$bgOpacity))});
+    @if $supportIE {
+        :root & {
+            filter: none;
+        }
+    }
+}
+
+// prefix setting
+$prefix-global-setting: webkit moz ms o;
+
+/// A mixin for generating vendor prefixes on non-standardized properties.
+///
+/// @param {String} $property
+///   Property to prefix
+///
+/// @param {*} $value
+///   Value to use
+///
+/// @param {List} $prefixes
+///   Prefixes to define
+///
+/// @example scss - Usage
+///   .element {
+///     @include prefixer(border-radius, 10px, webkit ms spec);
+///   }
+///
+/// @example css - CSS Output
+///   .element {
+///     -webkit-border-radius: 10px;
+///     -moz-border-radius: 10px;
+///     border-radius: 10px;
+///   }
+///
+/// @require {variable} $prefix-global-setting
+
+@mixin prefixer($property, $value, $prefixes:$prefix-global-setting) {
+  @each $prefix in $prefixes {
+    @if $prefix == webkit {
+        -webkit-#{$property}: $value;
+    } @else if $prefix == moz {
+        -moz-#{$property}: $value;
+    } @else if $prefix == ms {
+        -ms-#{$property}: $value;
+    } @else if $prefix == o {
+        -o-#{$property}: $value;
+    }
+  }
+  #{$property}:$value;
+}
+
+$iuim-z-index:1000;
+$iuim-z-index-dialog: $iuim-z-index + 1;
+
+%backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    // visibility: hidden;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    opacity: 0;
+    background: rgba(143,27,15,0.8);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    @include gradient(#000, .35);
+}
+
+.dialog-backdrop {
+    @extend %backdrop;
+    opacity: 1;
+    z-index: $iuim-z-index;
+    transform: translateZ($iuim-z-index+px);
+}
+
+.dialog-box {
+    z-index: $iuim-z-index-dialog;
+    transform: translateZ($iuim-z-index-dialog+px);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    text-align: center;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 10px 0;
+    &:after {
+        display: inline-block;
+        height: 100%;
+        margin-left: -.05em;
+        content: "";
+        vertical-align: middle;
+    }
+    .icon-close {
+        -webkit-appearance: none;
+        padding: 0;
+        cursor: pointer;
+        background: 0 0;
+        border: 0;
+        float: right;
+        font-weight: 700;
+        line-height: 1;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        filter: alpha(opacity=20);
+        opacity: .2;
+        &:after {
+            content: '\e616';
+            font-family: 'iconfont';
+            font-size: 20px;
+        }
+    }
+}
+
+.dialog-content {
+    @include prefixer(text-size-adjust, 100%);
+    @include prefixer(box-sizing, border-box);
+    width: 90%;
+    margin-bottom: 10px;
+    @include prefixer(transform, translate3d(0, 0, 0));
+    color: #2b2e38;
+    background: #fff;
+    display: inline-block;
+    border-radius: 3px;
+    vertical-align: middle;
+}
+
+.dialog-body, .dialog-footer {
+    padding: 20px;
+}
