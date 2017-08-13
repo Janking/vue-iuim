@@ -82,6 +82,7 @@ $iuim-z-index-dialog: $iuim-z-index + 1;
     opacity: 1;
     z-index: $iuim-z-index;
     transform: translateZ($iuim-z-index+px);
+    display: none;
 }
 
 .dialog-box {
@@ -96,6 +97,8 @@ $iuim-z-index-dialog: $iuim-z-index + 1;
     text-align: center;
     -webkit-overflow-scrolling: touch;
     padding: 10px 10px 0;
+    display: none;
+
     &:after {
         display: inline-block;
         height: 100%;
@@ -139,4 +142,38 @@ $iuim-z-index-dialog: $iuim-z-index + 1;
 
 .dialog-body, .dialog-footer {
     padding: 20px;
+}
+
+.show {
+    display: block;
+}
+
+@-webkit-keyframes zoomIn {
+    from {
+        -webkit-transform: scale3d(0.3, 0.3, 0.3);
+                transform: scale3d(0.3, 0.3, 0.3);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+@keyframes zoomIn {
+    from {
+        -webkit-transform: scale3d(0.3, 0.3, 0.3);
+                transform: scale3d(0.3, 0.3, 0.3);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.show .dialog-content {
+    -webkit-animation-name: zoomIn;
+    animation-name: zoomIn;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
 }
