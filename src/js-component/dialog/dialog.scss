@@ -9,7 +9,7 @@
     background-color: rgba($bgColor, $bgOpacity);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{ie-hex-str(rgba($bgColor,$bgOpacity))}, endColorstr=#{ie-hex-str(rgba($bgColor,$bgOpacity))});
     @if $supportIE {
-        :root & {
+         :root & {
             filter: none;
         }
     }
@@ -17,7 +17,6 @@
 
 // prefix setting
 $prefix-global-setting: webkit moz ms o;
-
 /// A mixin for generating vendor prefixes on non-standardized properties.
 ///
 /// @param {String} $property
@@ -42,25 +41,26 @@ $prefix-global-setting: webkit moz ms o;
 ///   }
 ///
 /// @require {variable} $prefix-global-setting
-
 @mixin prefixer($property, $value, $prefixes:$prefix-global-setting) {
-  @each $prefix in $prefixes {
-    @if $prefix == webkit {
-        -webkit-#{$property}: $value;
-    } @else if $prefix == moz {
-        -moz-#{$property}: $value;
-    } @else if $prefix == ms {
-        -ms-#{$property}: $value;
-    } @else if $prefix == o {
-        -o-#{$property}: $value;
+    @each $prefix in $prefixes {
+        @if $prefix==webkit {
+            -webkit-#{$property}: $value;
+        }
+        @else if $prefix==moz {
+            -moz-#{$property}: $value;
+        }
+        @else if $prefix==ms {
+            -ms-#{$property}: $value;
+        }
+        @else if $prefix==o {
+            -o-#{$property}: $value;
+        }
     }
-  }
-  #{$property}:$value;
+    #{$property}:$value;
 }
 
 $iuim-z-index:1000;
-$iuim-z-index-dialog: $iuim-z-index + 1;
-
+$iuim-z-index-dialog: $iuim-z-index+1;
 %backdrop {
     position: fixed;
     width: 100%;
@@ -70,7 +70,7 @@ $iuim-z-index-dialog: $iuim-z-index + 1;
     left: 0;
     z-index: 1000;
     opacity: 0;
-    background: rgba(143,27,15,0.8);
+    background: rgba(143, 27, 15, 0.8);
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
@@ -81,13 +81,13 @@ $iuim-z-index-dialog: $iuim-z-index + 1;
     @extend %backdrop;
     opacity: 1;
     z-index: $iuim-z-index;
-    transform: translateZ($iuim-z-index+px);
+    // transform: translateZ($iuim-z-index+px);
     display: none;
 }
 
 .dialog-box {
     z-index: $iuim-z-index-dialog;
-    transform: translateZ($iuim-z-index-dialog+px);
+    // transform: translateZ($iuim-z-index-dialog+px);
     position: fixed;
     top: 0;
     right: 0;
@@ -98,7 +98,6 @@ $iuim-z-index-dialog: $iuim-z-index + 1;
     -webkit-overflow-scrolling: touch;
     padding: 10px 10px 0;
     display: none;
-
     &:after {
         display: inline-block;
         height: 100%;
@@ -127,7 +126,7 @@ $iuim-z-index-dialog: $iuim-z-index + 1;
     }
 }
 
-.dialog-content {
+.dialog__content {
     @include prefixer(text-size-adjust, 100%);
     @include prefixer(box-sizing, border-box);
     width: 90%;
@@ -136,32 +135,27 @@ $iuim-z-index-dialog: $iuim-z-index + 1;
     color: #2b2e38;
     background: #fff;
     display: inline-block;
-    border-radius: 3px;
     vertical-align: middle;
 }
 
-.dialog-body, .dialog-footer {
-    padding: 20px;
+.dialog-body,
+.dialog-footer {
+    // padding: 20px;
+    padding: 0.4rem;
 }
 
-.show {
+.dialog--shown {
     display: block;
+}
+
+.dialog__content--radius {
+    border-radius: 0.3em;
 }
 
 @-webkit-keyframes zoomIn {
     from {
         -webkit-transform: scale3d(0.3, 0.3, 0.3);
-                transform: scale3d(0.3, 0.3, 0.3);
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-}
-@keyframes zoomIn {
-    from {
-        -webkit-transform: scale3d(0.3, 0.3, 0.3);
-                transform: scale3d(0.3, 0.3, 0.3);
+        transform: scale3d(0.3, 0.3, 0.3);
         opacity: 0;
     }
     50% {
@@ -169,7 +163,18 @@ $iuim-z-index-dialog: $iuim-z-index + 1;
     }
 }
 
-.show .dialog-content {
+@keyframes zoomIn {
+    from {
+        -webkit-transform: scale3d(0.3, 0.3, 0.3);
+        transform: scale3d(0.3, 0.3, 0.3);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.zoomIn {
     -webkit-animation-name: zoomIn;
     animation-name: zoomIn;
     -webkit-animation-duration: .3s;
